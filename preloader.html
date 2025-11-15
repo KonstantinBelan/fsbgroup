@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мозаичный прелоадер</title>
+    <style>
+      :root {
+        --primary-color: #3498db;
+        --white: #ffffff;
+        --tile-size: 80px;
+        --animation-duration: 0.7s;
+      }
+
+      /* Стили прелоадера */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        overflow: hidden;
+      }
+
+      .mosaic-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, var(--tile-size));
+        grid-auto-rows: var(--tile-size);
+      }
+
+      .mosaic-tile {
+        background-color: var(--primary-color);
+        opacity: 1;
+        transition: opacity var(--animation-duration) ease;
+      }
+
+      .preloader-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 10;
+      }
+
+      .preloader-spinner {
+        width: 120px;
+        height: auto;
+        margin-bottom: 20px;
+        animation: spin 1.5s linear infinite;
+      }
+
+      .preloader-text {
+        font-size: 18px;
+        color: var(--white);
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Анимация исчезновения */
+      #preloader.hidden .mosaic-tile {
+        opacity: 0;
+      }
+
+      /* #preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- Прелоадер -->
+    <div id="preloader">
+      <div class="mosaic-background" id="mosaicBackground"></div>
+      <div class="preloader-content">
+        <div class="preloader-spinner">
+          <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="23" cy="23" r="20" stroke="white" stroke-width="3" stroke-dasharray="31.4 31.4" stroke-linecap="round">
+              <animateTransform attributeName="transform" type="rotate" from="0 23 23" to="360 23 23" dur="1.5s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+        </div>
+        <div class="preloader-text">Загрузка...</div>
+      </div>
+    </div>
+
+    <!-- Основной контент страницы -->
+    <div class="page-content">
+      <h1>Добро пожаловать на сайт</h1>
+      <p>Это демонстрация работы мозаичного прелоадера. Когда страница загрузится, вы увидите, как квадратики мозаики постепенно исчезают, а затем полностью пропадает прелоадер.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+    </div>
+
+    <script>
+      // Создание мозаичного фона
+      function createMosaicBackground() {
+        const mosaicBackground = document.getElementById('mosaicBackground')
+        const containerWidth = window.innerWidth
+        const containerHeight = window.innerHeight
+
+        // Вычисляем количество плиток
+        const tilesX = Math.ceil(containerWidth / parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tile-size')))
+        const tilesY = Math.ceil(containerHeight / parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tile-size')))
+
+        // Создаем плитки
+        for (let i = 0; i < tilesX * tilesY; i++) {
+          const tile = document.createElement('div')
+          tile.className = 'mosaic-tile'
+
+          // Добавляем случайную задержку для анимации
+          const delay = Math.random() * 0.5
+          tile.style.transitionDelay = `${delay}s`
+
+          mosaicBackground.appendChild(tile)
+        }
+      }
+
+      // Функционал прелоадера
+      window.addEventListener('load', function () {
+        const preloader = document.getElementById('preloader')
+        const minLoadingTime = 1500 // Минимальное время показа прелоадера в миллисекундах
+
+        const startTime = Date.now()
+
+        function hidePreloader() {
+          const elapsedTime = Date.now() - startTime
+          const remainingTime = Math.max(0, minLoadingTime - elapsedTime)
+
+          setTimeout(() => {
+            // Добавляем класс для запуска анимации исчезновения
+            preloader.classList.add('hidden')
+
+            // Удаляем прелоадер после завершения анимации
+            setTimeout(() => {
+              // preloader.remove()
+            }, 1000)
+          }, remainingTime)
+        }
+
+        if (document.readyState === 'complete') {
+          hidePreloader()
+        } else {
+          window.addEventListener('load', hidePreloader)
+        }
+      })
+
+      // Создаем мозаичный фон после загрузки DOM
+      document.addEventListener('DOMContentLoaded', createMosaicBackground)
+    </script>
+  </body>
+</html>

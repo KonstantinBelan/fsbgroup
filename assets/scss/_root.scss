@@ -1,0 +1,35 @@
+:root {
+  --screen: 1420;
+}
+
+@media screen and (min-width: 2420px) {
+  :root {
+    --screen: 2000;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  :root {
+    --screen: 490;
+  }
+}
+
+$background: #eceae9;
+$white: #ffffff;
+
+$color: #080809;
+$orange: #f1400f;
+
+$btn: linear-gradient(138deg, #f0421e 39.45%, #ff5430 71.81%, #f0421e 100%);
+$btn-hover: linear-gradient(138deg, #ff5430 39.45%, #f0421e 71.81%, #ff5430 100%);
+
+// $size-general: 20px;
+// $size-h1: 56px;
+// $size-title: 50px;
+
+$line-height-title: 1.15;
+$line-height: 1.55;
+
+// $gap: 20;
+
+$screen: var(--screen);

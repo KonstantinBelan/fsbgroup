@@ -1,0 +1,121 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(8, 8, 9, 0.75);
+  z-index: 2555;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s ease-in-out;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+
+    .modal__content {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__content {
+    background-color: $white;
+    border-radius: px(24);
+    padding: px(42);
+    max-width: px(560);
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+
+    @include mobile {
+      padding: px(24);
+    }
+
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+    transition: all 0.15s ease-in-out;
+  }
+
+  &__close {
+    position: absolute;
+    top: px(20);
+    right: px(20);
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: $color;
+    transition: color 0.2s ease-in-out;
+
+    svg {
+      width: px(20);
+      height: px(20);
+
+      @include mobile {
+        width: px(16);
+        height: px(16);
+      }
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__title {
+    font-size: px(42);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-align: center;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    margin-bottom: px(12);
+
+    @include mobile {
+      font-size: px(36);
+    }
+  }
+
+  &__subtitle {
+    text-align: center;
+    margin-bottom: px(26);
+  }
+
+  form {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    input,
+    textarea {
+      width: 100%;
+      background: #F1F1F1;
+      height: px(60);
+      border-radius: px(12);
+      padding: px(16) px(24);
+      margin-bottom: px(10);
+      font-family: 'DM Sans', sans-serif;
+      font-size: px(16);
+      font-weight: 500;
+    }
+
+    textarea {
+      height: auto;
+      resize: none;
+    }
+
+    button {
+      height: px(60);
+    }
+  }
+}

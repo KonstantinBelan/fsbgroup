@@ -1,0 +1,9 @@
+@function px($px, $viewport: $screen) {
+  @return (calc($px * 100vw / $viewport));
+}
+
+$gap: px(16);
+
+$size-general: px(20);
+$size-h1: px(56);
+$size-title: px(50);
