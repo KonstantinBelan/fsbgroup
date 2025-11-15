@@ -27,7 +27,7 @@
     gap: px(32);
 
     @include mobile {
-      gap: px(16);
+      gap: px(24);
     }
 
     a {
@@ -59,6 +59,10 @@
 
     @include mobile {
       text-indent: -9999px;
+
+      span {
+        display: none;
+      }
     }
 
     &::before {
@@ -79,6 +83,10 @@
 
     @include mobile {
       text-indent: -9999px;
+
+      span {
+        display: none;
+      }
     }
 
     &::before {

@@ -405,7 +405,7 @@ footer.footer {
 }
 @media screen and (max-width: 720px) {
   .header__contacts {
-    gap: calc(1600vw / var(--screen));
+    gap: calc(2400vw / var(--screen));
   }
 }
 .header__contacts a {
@@ -440,6 +440,9 @@ footer.footer {
   .header__email {
     text-indent: -9999px;
   }
+  .header__email span {
+    display: none;
+  }
 }
 .header__email::before {
   content: "";
@@ -463,6 +466,9 @@ footer.footer {
 @media screen and (max-width: 720px) {
   .header__phone {
     text-indent: -9999px;
+  }
+  .header__phone span {
+    display: none;
   }
 }
 .header__phone::before {
