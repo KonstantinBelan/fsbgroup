@@ -24,7 +24,7 @@ window.addEventListener('load', function () {
         setTimeout(() => {
           preloader.classList.add('hidden')
 
-          gsap.utils.toArray('.section').forEach((servicesCards_item, index) => {
+          gsap.utils.toArray('.section, footer.footer').forEach((servicesCards_item, index) => {
             gsap.to(servicesCards_item, {
               scrollTrigger: {
                 trigger: servicesCards_item,
@@ -42,7 +42,7 @@ window.addEventListener('load', function () {
             })
           })
 
-          gsap.utils.toArray('header.header, footer.footer').forEach((servicesCards_item, index) => {
+          gsap.utils.toArray('header.header').forEach((servicesCards_item, index) => {
             gsap.to(servicesCards_item, {
               scrollTrigger: {
                 trigger: servicesCards_item,

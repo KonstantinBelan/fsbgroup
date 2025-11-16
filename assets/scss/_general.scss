@@ -193,7 +193,8 @@ a {
   }
 }
 
-section.section {
+section.section,
+footer.footer {
   will-change: transform, opacity, filter;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -204,13 +205,11 @@ section.section {
   filter: blur(px(12));
 }
 
-header.header,
-footer.footer {
+header.header {
   will-change: transform, opacity, filter;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transform: translateY(px(-120));
-
 }

@@ -343,7 +343,8 @@ a:hover {
     margin-right: auto !important;
   }
 }
-section.section {
+section.section,
+footer.footer {
   will-change: transform, opacity, filter;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -356,8 +357,7 @@ section.section {
           filter: blur(calc(1200vw / var(--screen)));
 }
 
-header.header,
-footer.footer {
+header.header {
   will-change: transform, opacity, filter;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -1227,12 +1227,12 @@ svg.active .svg-elem-23 {
 }
 .modal__subtitle {
   text-align: center;
-  margin-bottom: calc(2600vw / var(--screen));
 }
 .modal form {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: calc(2600vw / var(--screen));
 }
 .modal form input,
 .modal form textarea {
